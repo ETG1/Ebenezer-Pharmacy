@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .hoverEffect {
+        @apply duration-500 ease-in-out;
+    }
+    .navBar {
+        @apply text-base font-semibold hover:text-grayText/80 duration-500 cursor-pointer;
+    }
+}
