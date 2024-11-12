@@ -11,14 +11,8 @@ import Image from 'next/image';
 import React from 'react';
 import { MdStar } from 'react-icons/md';
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
-
-const IndividualProductPage = async ({ params }: Props) => {
-  const { slug } = params; 
+const IndividualProductPage = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = params;
   const query = groq`*[_type == "product" && slug.current == $slug][0]{ ... }`;
   const product: ProductData = await client.fetch(query, { slug });
   const bestSellerData: ProductData[] = await getBestSellerData();
