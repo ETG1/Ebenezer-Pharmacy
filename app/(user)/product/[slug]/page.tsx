@@ -11,7 +11,11 @@ import Image from 'next/image';
 import React from 'react';
 import { MdStar } from 'react-icons/md';
 
-const IndividualProductPage = async ({ params }: { params: { slug: string } }) => {
+interface PageProps {
+  params: { slug: string }
+}
+
+const IndividualProductPage = async ({ params }: PageProps) => {
   const { slug } = params;
   const query = groq`*[_type == "product" && slug.current == $slug][0]{ ... }`;
   const product: ProductData = await client.fetch(query, { slug });
@@ -48,7 +52,7 @@ const IndividualProductPage = async ({ params }: { params: { slug: string } }) =
                 })}
               </div>
               <p className="text-sm font-semibold text-blackaccent/60 tracking-wide ">
-                {`(12 customers review)`}
+                (12 customers review)
               </p>
             </div>
             <p className="text-sm tracking-wide text-gray-600">
