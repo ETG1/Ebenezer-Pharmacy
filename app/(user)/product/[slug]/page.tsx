@@ -11,9 +11,12 @@ import Image from 'next/image';
 import React from 'react';
 import { MdStar } from 'react-icons/md';
 
+export const dynamicParams = true;
+
 type Props = {
-  params: { slug: string }
-}
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = params;
