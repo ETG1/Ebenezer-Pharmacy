@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import { motion } from 'framer-motion'
-import { ShoppingCart } from 'lucide-react'
+//import { ShoppingCart } from 'lucide-react'
 import { GiShoppingCart } from 'react-icons/gi';
 
 export default function TrolleyLoader({ size = 40, color = 'ceruleanBlue' }: { size?: number; color?: string }) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaCcMastercard, FaClockRotateLeft, FaHeadset, FaWallet } from 'react-icons/fa6';
+import { FaCcMastercard, FaClockRotateLeft, FaHeadset } from 'react-icons/fa6';
 import { GoRocket } from 'react-icons/go';
 
 const data = [

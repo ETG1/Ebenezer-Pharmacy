@@ -8,7 +8,7 @@ import { CgMenuRight } from "react-icons/cg";
 
 const Header = () => {
   return (
-    <header className="w-full h-20 bg-accentWhite border-b-[1px] border-b-grayText/50 ">
+    <header className=" sticky z-50 top-0 left-0 w-full h-20 bg-accentWhite border-b-[1px] border-b-grayText/50 ">
       <Container className="h-full flex items-center justify-between gap-5 lg:gap-10 ">
         <Logo />
         <SearchBar/>

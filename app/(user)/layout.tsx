@@ -7,6 +7,7 @@ import SideBarP from "@/components/SideBarProfile";
 import SideBarC from "@/components/SideBarCart";
 import Layout from "@/components/layout";
 import { Toaster } from "react-hot-toast";
+import TrolleyLoader from "@/components/TrolleyLoader";
 
 
 
