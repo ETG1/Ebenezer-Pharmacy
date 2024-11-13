@@ -1,3 +1,4 @@
+"use client";
 import CheckoutSuccess from '@/components/CheckoutSuccess';
 import { redirect } from 'next/navigation';
 import React, { useEffect } from 'react';
