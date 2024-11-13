@@ -14,12 +14,12 @@ import { MdStar } from 'react-icons/md';
 export const dynamicParams = true;
 
 type Props = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
   const query = groq`*[_type == "product" && slug.current == $slug][0]{ title, description }`;
   const product = await client.fetch(query, { slug });
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function IndividualProductPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
   const query = groq`*[_type == "product" && slug.current == $slug][0]{ ... }`;
   const product: ProductData = await client.fetch(query, { slug });
   const bestSellerData: ProductData[] = await getBestSellerData();
@@ -60,15 +60,16 @@ export default async function IndividualProductPage({ params }: Props) {
               <Price amount={product.price} className="text-lg font-bold text-ceruleanBlue"/>
             </div>
             <div className="flex items-center gap-3">              
-              <div className="text-base text-grayText flex items-center">
-                {Array.from({ length: 5 }).map((_, index) => {
-                  const filled = index + 1 <= Math.floor(product.ratings || 0);
-                  const halfFilled = index + 1 > Math.floor(product.ratings || 0) && index < Math.ceil(product.ratings || 0);
-                  return (
-                    <MdStar key={index} className={`${filled ? "text-[#fa8900]" : halfFilled ? "text-yellow-200" : "text-grayText"}`} />
-                  );
-                })}
-              </div>
+            <div className="text-base text-grayText flex items-center">
+              {Array.from({ length: 5 }).map((_, index) => {
+                const filled = index + 1 <= Math.floor(product.ratings || 0);
+                const halfFilled = index + 1 > Math.floor(product.ratings || 0) && index < Math.ceil(product.ratings || 0);
+                return (
+                  <MdStar key={index} className={`${filled ? "text-[#fa8900]" : halfFilled ? "text-yellow-200" : "text-grayText"}`} />
+                );
+              })}
+            </div>
+
               <p className="text-sm font-semibold text-blackaccent/60 tracking-wide ">
                 (12 customers review)
               </p>
