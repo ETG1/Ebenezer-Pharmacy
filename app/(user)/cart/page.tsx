@@ -1,6 +1,5 @@
-import CartSection from '@/components/CartSection'
+
 import Container from '@/components/Container'
-import React from 'react'
 import { auth } from '@/auth'
 import CartContainer from '@/components/CartSection'
 
