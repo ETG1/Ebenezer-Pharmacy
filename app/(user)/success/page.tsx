@@ -1,24 +1,27 @@
 import CheckoutSuccess from '@/components/CheckoutSuccess';
 import { redirect } from 'next/navigation';
-import React from 'react'
+import React, { useEffect } from 'react';
 
-interface Props  {
-    SearchParams: {
+interface Props {
+    searchParams: {
         session_id: string | null;
     };
 }
 
-const SuccessPage = async ({SearchParams}: Props) => {
-    const id = await SearchParams?.session_id;
-    if (!id) {
-        redirect("/");
-    }
-    
-  return (
-    <div>
-        <CheckoutSuccess id={id}/>
-    </div>
-  )
-}
+const SuccessPage = ({ searchParams }: Props) => {
+    const { session_id } = searchParams;
 
-export default SuccessPage
+    useEffect(() => {
+        if (!session_id) {
+            redirect("/");
+        }
+    }, [session_id]);
+
+    return (
+        <div>
+            <CheckoutSuccess id={session_id} />
+        </div>
+    );
+};
+
+export default SuccessPage;
