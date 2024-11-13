@@ -1,3 +1,5 @@
+// app/layout.tsx
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
@@ -8,8 +10,7 @@ import SideBarC from "@/components/SideBarCart";
 import Layout from "@/components/layout";
 import { Toaster } from "react-hot-toast";
 import TrolleyLoader from "@/components/TrolleyLoader";
-
-
+import { SessionProvider } from "next-auth/react";  // Import SessionProvider
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -37,14 +38,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Layout>
-        <Header/>
-        {children}
-        <SideBarP/>
-        <SideBarC/>
-        <Footer/>
-        <Toaster position="bottom-right" toastOptions={{style: {background:"000000", color: "ffffff"},}}/>
-        </Layout>
+        
+        <SessionProvider>
+          <Layout>
+            <Header />
+            {children}
+            <SideBarP />
+            <SideBarC />
+            <Footer />
+            <Toaster position="bottom-right" toastOptions={{ style: { background: "#000000", color: "#ffffff" } }} />
+          </Layout>
+        </SessionProvider>
       </body>
     </html>
   );
