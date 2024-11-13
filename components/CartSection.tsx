@@ -7,17 +7,16 @@ import CartItem from './CartItem'
 import { resetCart } from '@/redux/shopReducer'
 import toast from 'react-hot-toast'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import Price from './Price'
 
 interface InitialSession {
   user?: {
-    email?: string;
-  };
+    email?: string | null;
+  } | null;
 }
 
-const CartContainer: React.FC<{ initialSession: InitialSession }> = ({ initialSession }) => {
+const CartContainer: React.FC<{ initialSession: InitialSession | null }> = ({ initialSession }) => {
   const cart = useSelector((state: { shop: { cart: ProductData[] } }) => state.shop.cart || []);
   const userInfo = useSelector((state: { shop: { userInfo: { id: string; name: string; email: string } | null } }) => state.shop.userInfo);
   const dispatch = useDispatch();
@@ -38,7 +37,7 @@ const CartContainer: React.FC<{ initialSession: InitialSession }> = ({ initialSe
       },
       body: JSON.stringify({
         items: cart,
-        email: initialSession?.user?.email,
+        email: initialSession?.user?.email ?? null,
       }),
     });
     const {url} = await response.json();
@@ -87,7 +86,7 @@ const CartContainer: React.FC<{ initialSession: InitialSession }> = ({ initialSe
                 </div>
               </div>
               {initialSession?.user ? (
-                <button onClick={handleCheckout}  className="flex items-center justify-center bg-ceruleanBlue text-white hover:bg-limeGreen hoverEffect px-8 py-3 rounded-lg font-semibold">
+                <button onClick={handleCheckout} className="flex items-center justify-center bg-ceruleanBlue text-white hover:bg-limeGreen hoverEffect px-8 py-3 rounded-lg font-semibold">
                   Proceed to checkout
                 </button>
               ) : (

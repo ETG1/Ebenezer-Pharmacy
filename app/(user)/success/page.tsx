@@ -1,28 +1,27 @@
-"use client";
-import CheckoutSuccess from '@/components/CheckoutSuccess';
-import { redirect } from 'next/navigation';
-import React, { useEffect } from 'react';
+import SuccessClient from './userSuccess'
 
-interface Props {
-    searchParams: {
-        session_id: string | null;
-    };
+interface SuccessPageProps {
+    searchParams: Promise<{
+        session_id?: string | null;
+    }>;
 }
 
-const SuccessPage = ({ searchParams }: Props) => {
-    const { session_id } = searchParams;
+const SuccessPage = async ({ searchParams }: SuccessPageProps) => {
+  // Handle the async logic in the server component
+  const resolvedSearchParams = await searchParams;
+  const { session_id } = resolvedSearchParams;
 
-    useEffect(() => {
-        if (!session_id) {
-            redirect("/");
-        }
-    }, [session_id]);
+  // If no session_id, redirect on the server side
+  if (!session_id) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
 
-    return (
-        <div>
-            <CheckoutSuccess id={session_id} />
-        </div>
-    );
-};
+  return <SuccessClient sessionId={session_id} />
+}
 
 export default SuccessPage;
