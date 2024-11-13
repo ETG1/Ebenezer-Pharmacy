@@ -10,3 +10,10 @@
         @apply text-base font-semibold hover:text-grayText/80 duration-500 cursor-pointer;
     }
 }
+
+@layer base {
+  :root {
+
+        --radius: 0.5rem
+    }
+}
