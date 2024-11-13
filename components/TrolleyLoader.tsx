@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion'
-//import { ShoppingCart } from 'lucide-react'
 import { GiShoppingCart } from 'react-icons/gi';
 
 export default function TrolleyLoader({ size = 40, color = 'ceruleanBlue' }: { size?: number; color?: string }) {
@@ -10,18 +9,17 @@ export default function TrolleyLoader({ size = 40, color = 'ceruleanBlue' }: { s
       <motion.div
         animate={{
           x: [-50, 50, -50],
-          rotate: [0, 0, -180, -180, 0],
+          scaleX: [1, 1, -1, -1, 1],
         }}
         transition={{
-          duration: 2,
+          duration: 3,
           ease: "easeInOut",
-          times: [0, 0.2, 0.5, 0.8, 1],
+          times: [0, 0.25, 0.5, 0.75, 1],
           repeat: Infinity,
           repeatDelay: 0
         }}
       >
         <GiShoppingCart size={size} color={color} />
-        {/* <ShoppingCart size={size} color={color} /> */}
       </motion.div>
       <span className="sr-only">Loading...</span>
     </div>

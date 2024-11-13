@@ -1,4 +1,4 @@
-import { auth } from '@/auth'
+import { auth, signOut } from '@/auth'
 import Container from '@/components/Container'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -6,17 +6,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { redirect } from 'next/navigation'
 import { BiSolidLogOut, BiPackage, BiMap, BiCreditCard } from "react-icons/bi"
 
 export default async function MyProfilePage() {
   const session = await auth();
-
+  if(!session?.user){
+    redirect("/");
+  }
   return (
     <Container className="py-10">
       <div className="space-y-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <h1 className="text-3xl font-bold tracking-tight">Welcome to your Dashboard</h1>
-          <form action="">
+          <form action={async () => {
+            "use server";
+            await signOut();
+          }}>
             <Button variant="outline" type="submit" className="w-full md:w-auto">
               <BiSolidLogOut className="mr-2 h-4 w-4" />
               Sign Out

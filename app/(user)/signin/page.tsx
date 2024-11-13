@@ -6,6 +6,8 @@ import Facebook from '@/public/facebook.png'
 import Tiktok from '@/public/tik-tok.png'
 import { auth, signIn } from '@/auth'
 import { redirect } from 'next/navigation'
+
+
 const SignInPage = async () => {
   const session= await auth();
   if (session?.user){
