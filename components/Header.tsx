@@ -29,17 +29,18 @@ const Header = () => {
           ))}
           {session ? (
             <>
-                <Button
+                <Link
+                    href={""}
                     onClick={handleLogout}
-                    className="uppercase text-green-500 hover:text-blue-500 font-semibold duration-300 cursor-pointer"
+                    className="bg-ceruleanBlue text-white hover:bg-limeGreen hoverEffect px-6 py-2 rounded-lg font-semibold"
                 >
                     Logout
-                </Button>
+                </Link>
                 <Link 
                     href={"/studio"}
-                    className="uppercase text-green-500 hover:text-blue-500 font-semibold duration-300 cursor-pointer"
+                    className="uppercase text-limeGreen hover:text-ceruleanBlue font-semibold duration-300 cursor-pointer"
                 >
-                    Studio
+                    Admin
                 </Link>
             </>
         ) : (
