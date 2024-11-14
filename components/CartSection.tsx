@@ -1,7 +1,7 @@
 'use client'
 
 import { ProductData } from '@/type'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CartItem from './CartItem'
 import { resetCart } from '@/redux/shopReducer'
@@ -20,14 +20,25 @@ const CartContainer: React.FC<{ initialSession: InitialSession | null }> = ({ in
   const cart = useSelector((state: { shop: { cart: ProductData[] } }) => state.shop.cart || []);
   const userInfo = useSelector((state: { shop: { userInfo: { id: string; name: string; email: string } | null } }) => state.shop.userInfo);
   const dispatch = useDispatch();
+  const [totalAmt, setTotalAmt] =useState(0)
 
   const handleResetCart = () => {
     const confirm = window.confirm("Are you sure you want to clear cart?");
     if (confirm) {
       dispatch(resetCart());
-      toast.success("Cart reset successfully");
+      toast.success("Cart cleared successfully");
     }
   };
+
+  useEffect(() => {
+    let price = 0;
+    if (cart) {
+        cart.forEach((item) => {
+            price += item?.price * item?.quantity;
+        });
+    }
+    setTotalAmt(price);
+}, [cart]);
 
   const handleCheckout = async () => {
     const response = await fetch("/api/checkout", {
@@ -45,7 +56,7 @@ const CartContainer: React.FC<{ initialSession: InitialSession | null }> = ({ in
       window.location.href = url
     }
     
-    toast.success("Heeeeey");
+    toast.success("Nice!");
   };
 
   return (
@@ -75,13 +86,13 @@ const CartContainer: React.FC<{ initialSession: InitialSession | null }> = ({ in
                 <h1 className="text-2xl font-semibold text-right">Cart Total</h1>
                 <div>
                   <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium">
-                    Subtotal <Price amount={254}/>
+                    Subtotal <Price amount={totalAmt}/>
                   </p>
                   <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium">
-                    Shipping Cost <Price amount={254}/>
+                    Shipping Cost <Price amount={0}/>
                   </p>
                   <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium">
-                    Total <Price amount={254}/>
+                    Total <Price amount={totalAmt}/>
                   </p>
                 </div>
               </div>

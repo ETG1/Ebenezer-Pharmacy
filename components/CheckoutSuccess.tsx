@@ -10,6 +10,7 @@ import { HiCheckCircle, HiHome } from "react-icons/hi2";
 import Link from 'next/link';
 import { FaBox } from 'react-icons/fa6';
 import { IoIosPhonePortrait } from 'react-icons/io';
+import toast from 'react-hot-toast';
 
 const CheckoutSuccess = ({ id }: { id: string }) => {
     const { cart } = useSelector((state: StoreState) => state?.users || {});
@@ -47,6 +48,7 @@ const CheckoutSuccess = ({ id }: { id: string }) => {
               if (data?.success) {
                 setLoading(false)
                 dispatch(resetCart())
+                toast.success(data?.message)
               }
         } catch (error) {
             console.log("Error", error);
@@ -80,11 +82,11 @@ const CheckoutSuccess = ({ id }: { id: string }) => {
                             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
                                 Success!
                             </h2>
-                            <p className="text-sm mt-2 text-gray-600">
+                            <p className="text-sm mt-2 text-gray-600 font-semibold">
                                 Successfully Paid
                             </p>
                             <p className="text-base text-gray-700">
-                                Thank you for your submission. We&apos;ve recieved your information and will process it shortly. you should recieve a confirmation email shorty.
+                            Thank you for your purchase! We’re thrilled to have you as a valued customer and are already processing your order. You’ll receive a confirmation email shortly. We truly appreciate your trust in us and look forward to delivering your items soon!
                             </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <Link href={"/"}>
