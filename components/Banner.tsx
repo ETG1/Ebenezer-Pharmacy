@@ -31,7 +31,7 @@ const Banner = async() => {
                 </Link>
             </div>
         </div>
-        <div className="flex flex-col space-y-5 md:space-y-10 h-auto md:h-[460px]">
+        <div className="flex flex-col space-y-5 md:space-y-10 h-auto md:h-[460px] rounded-lg">
             {banner.slice(1,3).map((item:BannerData) => (
                 <div key={item?._id} className="h-full md:h-[230px] bg-bgLight rounded-lg overflow-hidden flex justify-center items-center p-5  group">
                     <div className="flex flex-col w-1/2">
