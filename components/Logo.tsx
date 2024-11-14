@@ -14,8 +14,8 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
       <h2 className={twMerge("text-2xl font-bold flex items-center", className)}>
         {/* Logo Image */}
         <Image
-          src="/logo.png"
-          alt="Ebenezer Pharmacy logo"
+          src="/Logo.png"
+          alt="logo"
           width={90}
           height={90}
           priority
