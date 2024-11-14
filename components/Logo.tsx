@@ -18,6 +18,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
             alt={"site logo"}
             width={90}
             height={90}
+            priority
           />
         <span className="hover:text-ceruleanBlue hoverEffect">Ebenezer</span>
         <span className="hover:text-limeGreen ml-1 hoverEffect">Pharmacy</span>
