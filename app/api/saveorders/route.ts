@@ -1,15 +1,21 @@
 import { adminDB } from "@/firebaseAdmin";
 import { NextRequest, NextResponse } from "next/server";
 
-export const POST = async (request: NextRequest) => {
+export async function POST(request: NextRequest) {
     try {
         // Parse the JSON body
         const reqBody = await request.json();
-        const { cart = [], email, id, totalAmt = 0 } = reqBody || {};  // Set defaults in case properties are missing
+        const { cart = [], email, id, totalAmt = 0 } = reqBody;  // Set defaults in case properties are missing
 
         // Validate required fields
         if (!email || !id || !Array.isArray(cart)) {
-            throw new Error("Invalid input: Missing email, id, or cart data.");
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "Invalid input: Missing email, id, or cart data.",
+                },
+                { status: 400 }
+            );
         }
 
         // Prepare the order item
@@ -19,7 +25,7 @@ export const POST = async (request: NextRequest) => {
         };
 
         // Firestore operations only if there are items in the cart
-        if (cart.length) {
+        if (cart.length > 0) {
             const userOrdersRef = adminDB
                 .collection("users")
                 .doc(email)
@@ -44,12 +50,13 @@ export const POST = async (request: NextRequest) => {
         );
     } catch (error) {
         // Handle and return errors in a serializable way
+        console.error("Error saving order:", error);
         return NextResponse.json(
             {
                 success: false,
-                message: error || "An unexpected error occurred",
+                message: error instanceof Error ? error.message : "An unexpected error occurred",
             },
             { status: 500 }
         );
     }
-};
+}
