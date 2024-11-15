@@ -10,7 +10,7 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className }) => {
   return (
-    <Link href="/" className="hover:scale-105 transition-transform duration-200">
+    <Link href="/" className="hover:scale-105 transition-transform hoverEffect">
       <h2 className={twMerge("text-2xl font-bold flex items-center", className)}>
         {/* Logo Image */}
         <Image
@@ -21,8 +21,8 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
           priority
           unoptimized
         />
-        <span className="hover:text-ceruleanBlue transition-colors duration-200">Ebenezer</span>
-        <span className="hover:text-limeGreen ml-1 transition-colors duration-200">Pharmacy</span>
+        <span className="hover:text-ceruleanBlue transition-colors hoverEffect">Ebenezer</span>
+        <span className="hover:text-limeGreen ml-1 transition-colors hoverEffect">Pharmacy</span>
       </h2>
     </Link>
   )

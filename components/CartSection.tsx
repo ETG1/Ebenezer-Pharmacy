@@ -63,7 +63,7 @@ const CartContainer: React.FC<{ initialSession: InitialSession | null }> = ({ in
     <div>
       {cart.length > 0 ? (
         <div className="pb-20">
-          <div className="w-full h-20 bg-[#f5f5f5] text-blackaccent hidden lg:grid grid-cols-5 place-content-center px-6 text-lg font-semibold">
+          <div className="w-full h-20 bg-[#f5f5f5] text-blackaccent hidden lg:grid grid-cols-5 place-content-center px-6 text-lg font-semibold rounded-lg shadow-lg">
             <h2 className="col-span-2">Product</h2>
             <h2>Price</h2>
             <h2>Quantity</h2>
@@ -81,17 +81,17 @@ const CartContainer: React.FC<{ initialSession: InitialSession | null }> = ({ in
             Clear Cart
           </button>
           <div className="max-w-7xl flex justify-end">
-            <div className="w-96 flex flex-col gap-4">
-              <div>
+            <div className="w-96 flex flex-col gap-4 ">
+              <div className="rounded-lg shadow-lg">
                 <h1 className="text-2xl font-semibold text-right">Cart Total</h1>
                 <div>
-                  <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium">
+                  <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium rounded-lg">
                     Subtotal <Price amount={totalAmt}/>
                   </p>
-                  <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium">
+                  <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium rounded-lg">
                     Shipping Cost <Price amount={0}/>
                   </p>
-                  <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium">
+                  <p className="flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium rounded-lg">
                     Total <Price amount={totalAmt}/>
                   </p>
                 </div>
