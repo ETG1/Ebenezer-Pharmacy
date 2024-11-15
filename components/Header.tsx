@@ -21,7 +21,7 @@ const Header = () => {
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
     return (
-        <header className="sticky z-50 top-0 left-0 w-full h-20 bg-accentWhite border-b-[1px] border-b-grayText/50">
+        <header className="sticky z-50 top-0 left-0 w-full h-20 bg-white/60 backdrop-blur-lg border-b-[1px] border-b-grayText/10 shadow-sm">
             <Container className="h-full flex items-center justify-between gap-5 lg:gap-10">
                 <Logo />
                 <SearchBar />
