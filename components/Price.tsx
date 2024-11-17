@@ -1,5 +1,6 @@
 import React from 'react'
 import { twMerge } from 'tailwind-merge';
+import {cn} from "@/lib/utils";
 
 interface Props {
     amount: number;
