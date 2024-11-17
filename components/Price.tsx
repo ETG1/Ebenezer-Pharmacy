@@ -14,7 +14,7 @@ const Price = ({ amount, className }: Props) => {
     minimumFractionDigits: 2,
   });
   return (
-    <span className={twMerge("text-base font-semibold", className)}>
+    <span className={cn("text-base font-semibold", className)}>
         {priceFormat}
     </span>
   )
